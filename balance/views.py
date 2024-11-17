@@ -1,6 +1,6 @@
 from flask import render_template, request
 
-from balance.models import ListaMovimientos
+from balance.models import ListaMovimientos, Movimiento
 
 from . import app
 
@@ -24,8 +24,12 @@ def add_movement():
         return render_template('nuevo.html')
     if request.method == 'POST':
         # TODO: crear un movimiento, agregarlo a la lista, guardar la lista y devolver el texto 'OK' (o 'ERROR' si falla)
-        # mov = Movimiento(request.form)
-        return request.form
+        lista = ListaMovimientos()
+        mov = Movimiento(request.form.get('date'), request.form.get('subject'),
+                         request.form.get('mov_type'), request.form.get('amount'))
+
+        lista.agregar(mov)
+        return 'OK'
 
 
 @app.route('/modificar')

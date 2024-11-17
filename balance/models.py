@@ -67,6 +67,11 @@ class ListaMovimientos:
                 mov_dict.pop('errores')
                 writer.writerow(mov_dict)
 
+    def agregar(self, mov):
+        self.leer_desde_archivo()
+        self.movimientos.append(mov)
+        self.guardar()
+
     def __str__(self):
         result = ''
         for mov in self.movimientos:
