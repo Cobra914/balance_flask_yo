@@ -27,8 +27,10 @@ def add_movement():
         lista = ListaMovimientos()
         mov = Movimiento(request.form.get('date'), request.form.get('subject'),
                          request.form.get('mov_type'), request.form.get('amount'))
-
-        lista.agregar(mov)
+        if mov.has_errors:
+            return 'ERROR'
+        else:
+            lista.agregar(mov)
         return 'OK'
 
 
